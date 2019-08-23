@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.hrm.mapper.UserMapper">
+    <!--根据登录名和密码查询员工-->
+    <select id="selectByLoginNameAndPwd" parameterType="Integer" resultType="user">
+        select * from user_table where login_name = #{loginName} and login_pwd=#{loginPwd}
+    </select>
+    <!--按照员工编号查询-->
+    <select id="selectById" parameterType="Integer" resultType="user">
+        select * from user_table where user_table.user_id=#{userId}
+    </select>
+    <!--根据员工编号删除-->
+    <delete id="selectById" parameterType="Integer" >
+        delete  from user_table where user_id=#{userId}
+    </delete>
+    <!--动态修改-->
+    <update id="updateByParam" parameterType="user" >
+        update user_table
+        <set>
+            <if test="loginPwd ！=null" >login_pwd=#{loginName}</if>
+            <if test="userName ！=null" >user_name=#{userName}</if>
+            <if test="userImage ！=null" >user_image=#{loginName}</if>
+            <if test="loginName ！=null" >login_name=#{loginName}</if>
+            <if test="userStatus ！=null" >user_status=#{loginName}</if>
+            <if test="createDate ！=null" >create_date=#{createDate}</if>
+        </set>
+        where user_id=#{userId}
+    </update>
+
+    <!--动态查询-->
+    <select id="selectById" parameterType="Integer" resultType="user">
+        select * from user_table where user_table.user_id=#{userId}
+    </select>
+</mapper>
