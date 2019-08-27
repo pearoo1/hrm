@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <!--连接数据库的配置-->
+    <context id="DBTables" targetRuntime="MyBatis3">
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql:jdbc:mysql://127.0.0.1:3306/hr_db"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+
+
+        <!--
+            false(默认)：
+                scale>0 or length>18  java.math.BigDecimal
+                scale=0 or length[10,18]  java.lang.Long
+                scale=0 or length[5,9]  java.lang.Integer
+                scale=0 or length[5,9]  java.lang.Short
+            true: 会将数据库中decimal/number类型转换java.math.BigDecimal
+            因此可以不用配置
+        -->
+        <!--
+            useJSR310Types用于指定MyBatis Generator是否应强制在DATE，
+            TIME和TIMESTAMP字段中使用JSR-310数据类型，
+            而不是使用java.util.Date。
+            true：
+                JDBC Type	    Resolved Java Type
+                DATE	        java.time.LocalDate
+                TIME	        java.time.LocalTime
+                TIMESTAMP	    java.time.LocalDateTime
+        -->
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" /><!--false是默认所以可省略-->
+            <property name="useJSR310Types"  value="true"/><!--针对时间类型的-->
+        </javaTypeResolver>
+
+        <!-- 生成model实体类文件位置 -->
+        <javaModelGenerator targetPackage="com.zl.hrm.pojo" targetProject="\src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- 生成mapper.xml（生成sql语句）的位置 -->
+        <sqlMapGenerator targetPackage="com.zl.hrm.mapper"  targetProject="\src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- 生成Dao层Mapper接口的文件位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zl.hrm.dao"  targetProject="\src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!--数据库包含的数据表或者视图-->
+        <!--
+            tableName：数据库表的名称(不包括架构或目录)。(必须参数)
+            下面的为可选参数：
+             domainObjectName：
+        -->
+        <table tableName="user_table" domainObjectName="user" >
+            <property name="useActualColumnNames" value="false"/>
+           <!-- <generatedKey column="ID" sqlStatement="DB2" identity="true" />
+            <columnOverride column="DATE_FIELD" property="startDate" />
+            <ignoreColumn column="FRED" />
+            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />-->
+        </table>
+    </context>
+</generatorConfiguration>
