@@ -3,18 +3,27 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zl.hrm.mapper.UserMapper">
+    <!--插入用户信息-->
+    <insert id="insertUser"  useGeneratedKeys="true" keyProperty="user_id">
+        insert into user_table(login_name, login_pwd, user_name, user_image,create_date,user_status)
+        values (#{loginName},#{loginPwd},#{userName},#{userImage},#{createDate},#{userStatus})
+    </insert>
+
     <!--根据登录名和密码查询员工-->
     <select id="selectByLoginNameAndPwd" parameterType="Integer" resultType="user">
         select * from user_table where login_name = #{loginName} and login_pwd=#{loginPwd}
     </select>
+
     <!--按照员工编号查询-->
     <select id="selectById" parameterType="Integer" resultType="user">
         select * from user_table where user_table.user_id=#{userId}
     </select>
+
     <!--根据员工编号删除-->
     <delete id="selectById" parameterType="Integer" >
         delete  from user_table where user_id=#{userId}
     </delete>
+
     <!--动态修改-->
     <update id="updateByParam" parameterType="user" >
         update user_table
@@ -30,7 +39,12 @@
     </update>
 
     <!--动态查询-->
-    <select id="selectById" parameterType="Integer" resultType="user">
+    <select id="selectById"  resultType="user">
         select * from user_table where user_table.user_id=#{userId}
+        <where>
+            <if test="user.get.getUserName !=null ">user_name  like concat('%',#{user.getUserName},'%')</if>
+            <if test="user.get.getUserStatus !=null ">user_name  like concat('%',#{user.getUserStatus},'%')</if>
+        </where>
     </select>
+
 </mapper>

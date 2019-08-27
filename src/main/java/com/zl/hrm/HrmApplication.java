@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //定义扫描包
 @SpringBootApplication(scanBasePackages = "com.zl.hrm")
 //定义Mybatis接口
-@MapperScan(annotationClass = Mapper.class,basePackages = "com.zl,hrm")
+@MapperScan(annotationClass = Mapper.class,basePackages = "com.zl.hrm")
 public class HrmApplication {
     public static void main(String[] args) {
         SpringApplication.run(HrmApplication.class, args);

@@ -1,5 +1,6 @@
 package com.zl.hrm.pojo;
 
+
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
 

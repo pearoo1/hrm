@@ -6,6 +6,9 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserDao {
+    //插入员工
+    void insertUser(User user);
+
     //用户登录名和密码查询员工
     User selectByLoginNameAndPwd(@Param("loginName")String loginName,@Param("loginPwd")String loginPwd);
 
