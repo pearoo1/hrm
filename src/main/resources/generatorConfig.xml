@@ -8,11 +8,10 @@
     <!--连接数据库的配置-->
     <context id="DBTables" targetRuntime="MyBatis3">
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql:jdbc:mysql://127.0.0.1:3306/hr_db"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/hr_db?Unicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT"
                         userId="root"
                         password="root">
         </jdbcConnection>
-
 
         <!--
             false(默认)：
@@ -39,18 +38,18 @@
         </javaTypeResolver>
 
         <!-- 生成model实体类文件位置 -->
-        <javaModelGenerator targetPackage="com.zl.hrm.pojo" targetProject="\src\main\java">
+        <javaModelGenerator targetPackage="com.zl.hrm.pojo" targetProject="F:\JavaProject\hrm\src\main\java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
         <!-- 生成mapper.xml（生成sql语句）的位置 -->
-        <sqlMapGenerator targetPackage="com.zl.hrm.mapper"  targetProject="\src\main\java">
+        <sqlMapGenerator targetPackage="com.zl.hrm.mapper"  targetProject="F:\JavaProject\hrm\src\main\java">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!-- 生成Dao层Mapper接口的文件位置 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zl.hrm.dao"  targetProject="\src\main\java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zl.hrm.dao"  targetProject="F:\JavaProject\hrm\src\main\java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
@@ -60,12 +59,13 @@
             下面的为可选参数：
              domainObjectName：
         -->
-        <table tableName="user_table" domainObjectName="user" >
+        <table tableName="user_table" domainObjectName="User">
             <property name="useActualColumnNames" value="false"/>
            <!-- <generatedKey column="ID" sqlStatement="DB2" identity="true" />
             <columnOverride column="DATE_FIELD" property="startDate" />
             <ignoreColumn column="FRED" />
             <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />-->
         </table>
+
     </context>
 </generatorConfiguration>
